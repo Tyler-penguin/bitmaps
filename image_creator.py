@@ -33,7 +33,6 @@ def create_color(input_file, output_file, scale=1, type='rgb'):
         for line in f:
             clean = line.replace(' ', '')
             clean = clean.replace(',', '')
-            print(clean)
             row = []
             for index in range(len(clean)//6):
                 chunk = clean[index*6:index*6+6]
@@ -52,5 +51,5 @@ def create_color(input_file, output_file, scale=1, type='rgb'):
     img.save(my_dir + output_file)
 
 
-# create_monochrome('monochrome_img.bin', 'image.png', 100)
+create_monochrome('monochrome_img.bin', 'image.png', 100)
 create_color('mario-16x16.hex', 'image.png', 100, 'bgr')
