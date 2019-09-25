@@ -24,13 +24,10 @@ def create_monochrome(input_file, output_file, scale=1):
             if char == '0':
                 for i in range(scale):
                     row.append((0x00, 0x00, 0x00))
-            elif char == '1':
+            else:
                 for i in range(scale):
                     row.append((0xff, 0xff, 0xff))
-
-        for i in range(scale):
-            for color in row:
-                put_list.append(color)
+        put_list+=row*scale
 
     img = Image.new('RGB', (length*scale, height))
     img.putdata(put_list)
@@ -56,15 +53,12 @@ def create_color(input_file, output_file, scale=1, type='rgb'):
                     row.append((int(chunk[0:2], 16), int(chunk[2:4], 16), int(chunk[4:6], 16)))
                 elif type == 'bgr':
                     row.append((int(chunk[4:6], 16), int(chunk[2:4], 16), int(chunk[0:2], 16)))
-
-        for i in range(scale):
-            for color in row:
-                put_list.append(color)
+        put_list+=row*scale
 
     img = Image.new('RGB', (length*scale, height))
     img.putdata(put_list)
     img.save(my_dir + output_file)
 
 
-create_monochrome('monochrome_img.bin', 'image.png', 100)
-create_color('flower-16x16.hex', 'image.png', 100, 'bgr')
+# create_monochrome('hex_monochrome.hex', 'image.png', 1)
+create_color('image_12x12x24bit.hex', 'image.png', 100, 'bgr')
